@@ -41,38 +41,29 @@ const CartProvider: React.FC = ({ children }) => {
         loadProducts();
     }, []);
 
-    const addToCart = useCallback(async (newItem: Product) => {
-        let parsedItems = [] as Product[];
-        let index = -1; // buscar o indice do produto duplicado
+    const addToCart = useCallback(
+        async (newItem: Product) => {
+            const existingProductIndex = products.findIndex(
+                item => item.id === newItem.id,
+            );
 
-        const existingCartProducts = await AsyncStorage.getItem(
-            '@GoMarketplace:cart-items',
-        );
+            if (existingProductIndex !== -1) {
+                products[existingProductIndex].quantity += 1;
+            } else {
+                const updatedItem = { ...newItem, quantity: 1 };
 
-        if (existingCartProducts) {
-            parsedItems = JSON.parse(existingCartProducts);
-
-            index = parsedItems.findIndex(item => item.id === newItem.id);
-
-            if (index !== -1) {
-                parsedItems[index].quantity += 1;
+                products.push(updatedItem);
             }
-        }
 
-        if (index === -1) {
-            const updatedItem = newItem;
+            setProducts(products);
 
-            updatedItem.quantity = 0;
-            updatedItem.quantity += 1;
-
-            parsedItems.push(updatedItem);
-        }
-
-        await AsyncStorage.setItem(
-            '@GoMarketplace:cart-items',
-            JSON.stringify(parsedItems),
-        );
-    }, []);
+            await AsyncStorage.setItem(
+                '@GoMarketplace:cart-items',
+                JSON.stringify(products),
+            );
+        },
+        [products],
+    );
 
     const increment = useCallback(async (id: string) => {
         const items = await AsyncStorage.getItem('@GoMarketplace:cart-items');
