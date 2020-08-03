@@ -26,8 +26,10 @@
 This project was taught by Rocketseat on Bootcamp course.
 
 ## Show Aplication
-<img alt="dashboard" src="src/assets/dashboard.png"/>
-<img alt="repository-details" src="src/assets/repository-details.png"/>
+<p display="flex" align="center">
+    <img alt="dashboard" src="src/assets/screenshots/dashboard-gomarketplace.png" width="220" height="400" />
+    <img alt="repository-details" src="src/assets/screenshots/cart-go-marketplace.png" width="220" height="400" />
+</p>
 
 ## :rocket: Technologies
 
