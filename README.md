@@ -23,8 +23,6 @@
   <a href="#information_source-getting-started">Getting Started</a>&nbsp;&nbsp;&nbsp;
 </p>
 
-This project was taught by Rocketseat on Bootcamp course.
-
 ## Show Aplication
 <p display="flex" align="center">
     <img alt="dashboard" src="src/assets/screenshots/dashboard-gomarketplace.png" width="220" height="400" />
